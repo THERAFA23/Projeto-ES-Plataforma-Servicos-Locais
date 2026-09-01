@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import jakarta.transaction.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 @Service
@@ -129,7 +130,7 @@ public class OrcamentoService {
         orcamento.setStatusResposta("ACEITO");
         servico.setCliente(clienteAutenticado);
         servico.setStatus(StatusServico.CONTRATADO);
-        servico.setDataContratacao(LocalDateTime.now());
+        servico.setDataContratacao(LocalDateTime.now(ZoneOffset.UTC));
         Orcamento orcamentoAtualizado = orcamentoRepository.save(orcamento);
 
         return toResponseDto(orcamentoAtualizado);
